@@ -4,13 +4,11 @@ package com.sinian.parking.service.osr;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Paths;
 
 @Service
 public class OCRService {
@@ -18,14 +16,14 @@ public class OCRService {
 
     public OCRService() {
         tesseract = new Tesseract();
-        // Укажите правильный путь к tessdata
-        tesseract.setDatapath("src/main/resources/tessdata");
-        tesseract.setLanguage("eng"); // Установите нужный язык распознавания
+        String datapath = Paths.get("src", "main", "resources", "tessdata").toAbsolutePath().toString();
+        tesseract.setDatapath(datapath);
+        tesseract.setLanguage("eng");
     }
     public String recognizeLicensePlate(InputStream inputStream) throws TesseractException {
         try {
             BufferedImage bufferedImage = ImageIO.read(inputStream);
-            return tesseract.doOCR(bufferedImage);
+            return tesseract.doOCR(bufferedImage).replaceAll("\\s+","");
         } catch (Exception e) {
             throw new TesseractException("Failed to read image from input stream", e);
         }
