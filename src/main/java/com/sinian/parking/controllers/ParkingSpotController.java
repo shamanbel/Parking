@@ -28,9 +28,10 @@ public class ParkingSpotController {
     }
 
     @PostMapping
-    public ResponseEntity<ParkingSpot> createParkingSpot(@RequestBody ParkingSpot parkingSpot) {
-        ParkingSpot createdSpot = parkingSpotService.createParkingSpot(parkingSpot);
-        return new ResponseEntity<>(createdSpot, HttpStatus.CREATED);
+    public ResponseEntity<List<ParkingSpot>> createParkingSpots(@RequestBody List<ParkingSpot> parkingSpots) {
+        List<ParkingSpot> createdSpots = parkingSpotService.createParkingSpots(parkingSpots);
+
+        return new ResponseEntity<>(createdSpots, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

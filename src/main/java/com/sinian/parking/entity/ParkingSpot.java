@@ -20,21 +20,25 @@ public class ParkingSpot {
     private boolean isReserved;
 
       // Each vehicle has only one assigned parking space.
-      @OneToOne(mappedBy = "parkingSpot", cascade = CascadeType.ALL, orphanRemoval = true)
-      private Vehicle vehicle;
+/*      @OneToOne(mappedBy = "parkingSpot", cascade = CascadeType.ALL, orphanRemoval = true)
+      private Vehicle vehicle;*/
 
-    public ParkingSpot() {
-    }
+      @ManyToOne
+      @JoinColumn(name = "rate_id")
+      private Rate rate;
+      public ParkingSpot() {
+      }
 
-    public ParkingSpot(String spotNumber, boolean isAvailable,  Rate rate) {
-        this.spotNumber = spotNumber;
-        // this.isAvailable = isAvailable;
+    public ParkingSpot(Rate rate, Vehicle vehicle, boolean isReserved, boolean isAvailable, String spotNumber, int id) {
         this.rate = rate;
+        //this.vehicle = vehicle;
+        this.isReserved = isReserved;
+        this.isAvailable = isAvailable;
+        this.spotNumber = spotNumber;
+        this.id = id;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "rate_id",nullable = false)
-    private Rate rate;
+
 
     // Getters and setters
     public int getId() {
@@ -73,11 +77,11 @@ public class ParkingSpot {
         this.isReserved = reserved;
     }
 
-    public Vehicle getVehicle() {
+/*    public Vehicle getVehicle() {
         return vehicle;
     }
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
-    }
+    }*/
 
 }

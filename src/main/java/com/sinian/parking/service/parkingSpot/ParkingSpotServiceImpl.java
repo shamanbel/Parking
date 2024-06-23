@@ -26,9 +26,13 @@ public class ParkingSpotServiceImpl implements ParkingSpotService{
     }
 
     @Override
-    public ParkingSpot createParkingSpot(ParkingSpot parkingSpot) {
-        return parkingSpotRepository.save(parkingSpot);
+    public List<ParkingSpot> createParkingSpots(List<ParkingSpot> parkingSpots) {
+
+        return parkingSpotRepository.saveAll(parkingSpots);
     }
+  /*  public ParkingSpot createParkingSpot(ParkingSpot parkingSpot) {
+        return parkingSpotRepository.save(parkingSpot);
+    }*/
 
     @Override
     public ParkingSpot updateParkingSpot(int id, ParkingSpot parkingSpot) {

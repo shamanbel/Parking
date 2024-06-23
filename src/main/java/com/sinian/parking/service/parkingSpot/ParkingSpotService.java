@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ParkingSpotService {
     List<ParkingSpot> getAllParkingSpots();
     ParkingSpot getParkingSpotById(int id);
-    ParkingSpot createParkingSpot(ParkingSpot parkingSpot);
+    List<ParkingSpot> createParkingSpots(List<ParkingSpot> parkingSpots);
     ParkingSpot updateParkingSpot(int id, ParkingSpot parkingSpot);
     void deleteParkingSpot(int id);
     int countParkingSpots();
